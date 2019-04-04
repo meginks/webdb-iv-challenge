@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     return knex.schema 
     .createTable('dishes', table => {
         table.increments();
+
         table.string('dish_name', 128)
         .notNullable()
         .unique();
@@ -48,7 +49,32 @@ exports.up = function(knex, Promise) {
         .inTable('ingredients')
         .onDelete('CASCADE')
         .onUpdate('CASCADE'); 
-    });
+
+        table 
+        .string('quantity', 128)
+        .notNullable()
+    })
+    .createTable('instructions', table => {
+        table.increments(); 
+
+        table
+        .integer('step_number')
+        .notNullable(); 
+
+        table 
+        .string('step')
+        .notNullable(); 
+
+        table
+        .integer('recipe_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('recipes')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE') 
+
+    })
     
 
 
