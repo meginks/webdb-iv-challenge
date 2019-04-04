@@ -32,7 +32,7 @@ exports.up = function(knex, Promise) {
         table.increments(); 
 
         table
-        .integer('recipe_id'); 
+        .integer('recipe_id') 
         .unsigned()
         .notNullable()
         .references('id')
